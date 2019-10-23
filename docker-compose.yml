@@ -1,0 +1,17 @@
+version: "3.5"
+services:
+  my_alpine:
+    working_dir: /opt/
+    env_file:
+      - variables.env
+    container_name: my_alpine
+    image: alpine:3.9
+    environment:
+      LANG: 'en_US.UTF-8'
+    volumes:
+      - ~/.ssh:/root/.ssh
+      - ./docker-entrypoint.sh:/docker-entrypoint.sh
+      - ./set_env:/opt/set_env
+      - ./eks_control.sh:/opt/eks_control.sh
+      - /Users/david/Data/git_my/k8s-test/fun88-deploy-platform:/opt/deploy
+    entrypoint: /docker-entrypoint.sh
